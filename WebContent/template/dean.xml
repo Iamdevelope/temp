@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excel id="dean" code="dean" name="院长信息表">
+    <colgroup>
+        <col index="A" width='17em'></col>
+        <col index="B" width='17em'></col>
+        <col index="C" width='17em'></col>
+        <col index="D" width='17em'></col>
+        <col index="E" width='17em'></col> 
+        <col index="F" width='17em'></col>
+    </colgroup>
+    <title>
+        <tr height="30px">
+            <td rowspan="1" colspan="6" value="院长信息表" />
+        </tr>
+    </title>
+    <thead>
+        <tr height="30px">
+            <th value="姓名" />
+            <th value="密码" />
+            <th value="性别" />
+            <th value="联系方式" />
+            <th value="邮箱" />
+            <th value="学校" />
+        </tr>
+    </thead>
+    <tbody>
+        <tr height="30px" firstrow="2" firstcol="0" repeat="0">
+            <td type="string" isnullable="false" maxlength="50" /><!--姓名 -->
+            <td type="string" isnullable="false" maxlength="50" /><!--密码 -->
+            <td type="string" isnullable="false" maxlength="20" /><!--性别 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--联系方式 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--邮箱 -->
+            <td type="string" isnullable="false" maxlength="60" /><!-- 学校-->
+        </tr>
+    </tbody>
+</excel>
