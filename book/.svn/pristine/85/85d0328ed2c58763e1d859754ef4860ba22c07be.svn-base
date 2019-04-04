@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excel id="student" code="student" name="学生信息表">
+    <colgroup>
+        <col index="A" width='17em'></col>
+        <col index="B" width='17em'></col>
+        <col index="C" width='17em'></col>
+        <col index="D" width='17em'></col>
+        <col index="E" width='17em'></col> 
+        <col index="F" width='17em'></col>
+        <col index="G" width='17em'></col>
+        <col index="H" width='17em'></col>   
+        <col index="I" width='30em'></col>   
+    </colgroup>
+    <title>
+        <tr height="20px">
+            <td rowspan="1" colspan="9" value="学生信息表" />
+        </tr>
+    </title>
+    <thead>
+        <tr height="20px">
+            <th value="姓名" />
+            <th value="出生年月" />
+            <th value="性别" />
+            <th value="父亲姓名" />
+            <th value="父亲电话" />
+            <th value="母亲姓名" />
+            <th value="母亲电话" />
+            <th value="班级" />
+            <th value="学校" />
+        </tr>
+    </thead>
+    <tbody>
+        <tr height="20px" firstrow="2" firstcol="0" repeat="0">
+            <td type="string" isnullable="false" maxlength="50" /><!--姓名 -->
+            <td type="date" isnullable="false" maxlength="50" /><!--出生日期 -->
+            <td type="string" isnullable="false" maxlength="20" /><!--性别 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--父亲姓名 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--父亲方式 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--父亲姓名 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--父亲方式 -->
+            <td type="string" isnullable="false" maxlength="30" /><!-- 班级 -->
+            <td type="string" isnullable="false" maxlength="60" /><!-- 学校-->
+        </tr>
+    </tbody>
+</excel>

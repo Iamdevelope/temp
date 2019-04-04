@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.gl.model.Teacher" table="teacher">
+		<id name="tid">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="password" />
+		<property name="username" />
+		<property name="phone_number" />
+		<property name="school" />
+		<property name="class_time" />
+		<property name="nead_book" />
+		<property name="email" />
+		<property name="create_time" />
+		<property name="last_login_time" />
+		<property name="login_count" />
+		<property name="area" />
+		<property name="isdelete"></property>
+		<property name="code" />
+		<property name="sex" />
+		<property name="class_type" />
+		<property name="login_state" />
+
+		<!-- 配置教师与绘本教案关联关系 -->
+		<set name="teacherbook" cascade="delete">
+			<key column="tid" />
+			<one-to-many class="com.gl.model.TeacherBook" />
+		</set>
+		<!-- 配置教师与绘本关联关系 -->
+		<set name="book" table="book_teacher" inverse="true"
+			cascade="delete">
+			<key column="tid" />
+			<many-to-many class="com.gl.model.Book" column="bid" />
+		</set>
+		<!-- 配置教师与学生关联关系 -->
+		<set name="student" cascade="delete">
+			<key column="tid" />
+			<one-to-many class="com.gl.model.Student" />
+		</set>
+		<!-- 配置教师与院长关联关系 -->
+		<many-to-one name="dean" lazy="false"
+			class="com.gl.model.Dean" column="did" />
+	</class>
+</hibernate-mapping>

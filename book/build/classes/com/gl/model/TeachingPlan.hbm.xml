@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.gl.model.TeachingPlan" table="teaching_plan">
+        <id name="idteaching_plan">
+            <generator class="native"/>
+        </id>
+        <property name="teaching_plan_name"/>
+        <property name="teaching_path"/>
+        
+		<many-to-one name="book" class="com.gl.model.Book" unique="true" column="bid">
+		</many-to-one>
+    </class>
+</hibernate-mapping>

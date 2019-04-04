@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 引入外部属性文件 -->
+	<context:property-placeholder
+		location="classpath:jdbc.properties" />
+	<!-- 配置c3p0连接池 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!-- Hibernate相关信息 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置Hibernate的其他的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop><!-- 是否在控制台输出SQL语句 -->
+				<prop key="hibernate.format_sql">false</prop><!-- 是否将输出的SQL语句标准化输出 -->
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 配置映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/gl/model/Teacher.hbm.xml</value>
+				<value>com/gl/model/TeacherBook.hbm.xml</value>
+				<value>com/gl/model/Manager.hbm.xml</value>
+				<value>com/gl/model/Dean.hbm.xml</value>
+				<value>com/gl/model/Book.hbm.xml</value>
+				<value>com/gl/model/Student.hbm.xml</value>
+				<value>com/gl/model/Admin.hbm.xml</value>
+				<value>com/gl/model/Book_Teacher.hbm.xml</value>
+				<value>com/gl/model/BookTheme.hbm.xml</value>
+				<value>com/gl/model/BookType.hbm.xml</value>
+				<value>com/gl/model/SoftwareCode.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置multipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <property name="maxUploadSize" value="307200000" />
+	    <property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<!-- 事务管理: -->
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<bean id="managerUpload" class="com.gl.servlet.ManagerUpload" scope="prototype"></bean>
+	<!-- 配置Action -->
+	
+	<!-- 配置的教师登录的Action -->
+	<bean id="teacherLoginAction" class="com.gl.action.TeacherAction"
+		scope="prototype">
+
+	</bean>
+	<!-- 配置管理员登录的Action -->
+	<bean id="managerLoginAction" class="com.gl.action.ManagerAction"
+		scope="prototype">
+
+	</bean>
+	<!-- 配置管理员登录的Action -->
+	<bean id="superManagerLoginAction"
+		class="com.gl.action.SuperManagerAction" scope="prototype">
+
+	</bean>
+	<!-- 配置院长登录的Action -->
+	<bean id="deanLoginAction" class="com.gl.action.DeanAction"
+		scope="prototype">
+
+	</bean>
+
+	<!-- 配置验证码图片Action -->
+	<bean id="checkImgAction" class="com.gl.action.CheckImgAction"
+		scope="prototype">
+
+	</bean>
+	<bean id="modelDownloadAction" class="com.gl.action.ModelDownloadAction" scope="prototype"></bean>
+
+	<!-- 配置教师用户模块 -->
+	<bean id="teacherAction" class="com.gl.action.TeacherAction"
+		scope="prototype">
+		<property name="teacherService" ref="teacherService" />
+	</bean>
+	<!-- 配置院长用户模块 -->
+	<bean id="deanAction" class="com.gl.action.DeanAction"
+		scope="prototype">
+		<property name="deanService" ref="deanService" />
+	</bean>
+
+	<!-- 配置超级管理员用户模块 -->
+	<bean id="superManagerAction"
+		class="com.gl.action.SuperManagerAction" scope="prototype">
+		<property name="managerService" ref="managerService" />
+	</bean>
+	<!-- 配置超级管理员管理教师模块 -->
+	<bean id="teacherSuperManagerAction"
+		class="com.gl.action.TeacherSuperManagerAction" scope="prototype">
+		<property name="teacherService" ref="teacherService" />
+	</bean>
+	<!-- 配置院长管理教师模块 -->
+	<bean id="teacherDeanAction"
+		class="com.gl.action.TeacherDeanAction" scope="prototype">
+		<property name="teacherService" ref="teacherService" />
+		<property name="deanService" ref="deanService" />
+	</bean>
+	<!-- 配置超级管理员管理院长模块 -->
+	<bean id="deanSuperManagerAction"
+		class="com.gl.action.DeanSuperManagerAction" scope="prototype">
+		<property name="deanService" ref="deanService" />
+	</bean>
+	<!-- 配置超级管理员管理管理员模块 -->
+	<bean id="managerSuperManagerAction"
+		class="com.gl.action.ManagerSuperManagerAction" scope="prototype">
+		<property name="managerService" ref="managerService" />
+	</bean>
+
+	<!-- 配置超级管理员管理学生模块 -->
+	<bean id="studentSuperManagerAction"
+		class="com.gl.action.StudentSuperManagerAction" scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+	<!-- 配置院长管理学生模块 -->
+	<bean id="studentDeanAction"
+		class="com.gl.action.StudentDeanAction" scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+	<!-- 配置教师管理学生模块 -->
+	<bean id="studentTeacherAction"
+		class="com.gl.action.StudentTeacherAction" scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<!-- 配置管理员用户模块 -->
+	<bean id="managerAction" class="com.gl.action.ManagerAction"
+		scope="prototype">
+		<property name="managerService" ref="managerService" />
+	</bean>
+	<!-- 配置超级管理员用户模块 -->
+	<bean id="adminAction" class="com.gl.action.SuperManagerAction"
+		scope="prototype">
+		<property name="adminService" ref="adminService" />
+	</bean>
+	<!-- 配置学生用户模块 -->
+	<bean id="studentAction" class="com.gl.action.StudentAction"
+		scope="prototype">
+		<property name="studentService" ref="studentService" />
+	</bean>
+	<!-- 配置绘本模块 -->
+	<bean id="bookAction" class="com.gl.action.BookAction"
+		scope="prototype">
+		<property name="bookService" ref="bookService" />
+	</bean>
+	<!-- 配置管理员管理教师模块 -->
+	<bean id="teacherManagerAction"
+		class="com.gl.action.TeacherManagerAction" scope="prototype">
+		<property name="teacherService" ref="teacherService" />
+	</bean>
+	<!-- 配置管理员管理院长模块 -->
+	<bean id="deanManagerAction"
+		class="com.gl.action.DeanManagerAction" scope="prototype">
+		<property name="deanService" ref="deanService" />
+	</bean>
+
+	<!-- 配置超级管理员管理绘本模块 -->
+	<bean id="bookSuperManagerAction"
+		class="com.gl.action.BookSuperManagerAction" scope="prototype">
+		<property name="bookService" ref="bookService" />
+	</bean>
+	<!-- 配置超级管理员对绘本类型模块 -->
+	<bean id="bookTypeSuperManagerAction" class="com.gl.action.BookTypeSuperManagerAction" scope="prototype">
+	    <property name="bookTypeService" ref="bookTypeService" />
+	</bean>
+	<!-- 配置超级管理员对绘本主题模块 -->
+	<bean id="bookThemeSuperManagerAction" class="com.gl.action.BookThemeSuperManagerAction" scope="prototype">	    
+		<property name="bookThemeService" ref="bookThemeService" />
+	</bean>
+	<!-- 配置院长管理绘本 -->
+	<bean id="bookDeanAction" class="com.gl.action.BookDeanAction"
+		scope="prototype">
+		<property name="bookService" ref="bookService" />
+	</bean>
+	<!-- 配置教师管理绘本模块 -->
+	<bean id="bookTeacherAction"
+		class="com.gl.action.BookTeacherAction" scope="prototype">
+		<property name="bookService" ref="bookService" />
+		<property name="teacherBookService" ref="teacherBookService" />
+		<property name="bookTeacherService" ref="bookTeacherService" />
+	</bean>
+	<!-- 配置教案 -->
+	<bean id="teacherBookAction"
+		class="com.gl.action.TeacherBookAction" scope="prototype">
+		<property name="teacherBookService" ref="teacherBookService" />
+	</bean>
+	
+	<!-- 配置软件注册码 -->
+	<bean id="softwareCodeAction" class="com.gl.action.SoftwareCodeAction" scope="prototype">
+	    <property name="softwareCodeService" ref="softwareCodeService"/>
+	</bean>
+
+	<!-- Service配置 -->
+	<bean id="teacherService" class="com.gl.service.TeacherService"
+		scope="prototype">
+		<property name="teacherDao" ref="teacherDao" />
+	</bean>
+	<bean id="managerService" class="com.gl.service.ManagerService"
+		scope="prototype">
+		<property name="managerDao" ref="managerDao" />
+	</bean>
+	<bean id="deanService" class="com.gl.service.DeanService"
+		scope="prototype">
+		<property name="deanDao" ref="deanDao" />
+	</bean>
+	<bean id="bookService" class="com.gl.service.BookService"
+		scope="prototype">
+		<property name="bookDao" ref="bookDao" />
+	</bean>
+	<bean id="teacherBookService"
+		class="com.gl.service.TeacherBookService" scope="prototype">
+		<property name="teacherBookDao" ref="teacherBookDao" />
+	</bean>
+	<bean id="adminService" class="com.gl.service.AdminService"
+		scope="prototype">
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+	<bean id="studentService" class="com.gl.service.StudentService"
+		scope="prototype">
+		<property name="studentDao" ref="studentDao" />
+	</bean>
+	<bean id="bookTeacherService"
+		class="com.gl.service.BookTeacherService" scope="prototype">
+		<property name="bookTeacherDao" ref="bookTeacherDao" />
+	</bean>
+	<bean id="bookTypeService" class="com.gl.service.BookTypeService" scope="prototype">
+	    <property name="bookTypeDao" ref="bookTypeDao" />
+	</bean>
+	<bean id="bookThemeService" class="com.gl.service.BookThemeService" scope="prototype">
+	    <property name="bookThemeDao" ref="bookThemeDao" />
+	</bean>
+	<bean id="softwareCodeService" class="com.gl.service.SoftwareCodeService" scope="prototype">
+	    <property name="softwareCodeDao" ref="softwareCodeDao" />
+	</bean>
+
+	<!-- DAO 配置 -->
+	<bean id="teacherDao" class="com.gl.dao.TeacherDao"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="managerDao" class="com.gl.dao.ManagerDao"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="deanDao" class="com.gl.dao.DeanDao" scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="bookDao" class="com.gl.dao.BookDao" scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="studentDao" class="com.gl.dao.StudentDao"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="teacherBookDao" class="com.gl.dao.TeacherBookDao"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="adminDao" class="com.gl.dao.AdminDao" scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="bookTeacherDao" class="com.gl.dao.BookTeacherDao"
+		scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="bookTypeDao" class="com.gl.dao.BookTypeDao" scope="prototype">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="bookThemeDao" class="com.gl.dao.BookThemeDao" scope="prototype">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="softwareCodeDao" class="com.gl.dao.SoftwareCodeDao" scope="prototype">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+</beans>
