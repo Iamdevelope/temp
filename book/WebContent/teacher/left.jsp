@@ -28,8 +28,8 @@
 					<script type="text/javascript">
 		d = new dTree('d');
 		d.add('01',-1,'系统菜单树');
-		d.add('0101','01','绘本管理');
-		d.add('010102','0101','绘本类型管理');
+		d.add('0101','01','绘本');
+		d.add('010102','0101','绘本类型');
 		d.add('01010201','010102','社会');
 		d.add('01010202','01010201','社会','${pageContext.request.contextPath}/bookTeacher_findBookAll?btype=1&page=1','','mainFrame');
 		d.add('01010203','010102','科学');
@@ -43,13 +43,25 @@
 		d.add('01010211','010102','语言');
 		d.add('01010212','01010211','语言','${pageContext.request.contextPath}/bookTeacher_findBookAll?btype=7&page=1','','mainFrame');
 		
-		d.add('010103','0101','绘本主题管理');
+		d.add('010103','0101','绘本教案');
+		d.add('01010301','010103','社会');
+		d.add('01010302','01010301','社会','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=1&page=1','','mainFrame');
+		d.add('01010303','010103','科学');
+		d.add('01010304','01010303','数学','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=2&page=1','','mainFrame');
+		d.add('01010305','01010303','探究','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=3&page=1','','mainFrame');
+		d.add('01010306','010103','艺术');
+		d.add('01010307','01010306','美术','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=4&page=1','','mainFrame');
+		d.add('01010308','01010306','音乐','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=5&page=1','','mainFrame');
+		d.add('01010309','010103','健康');
+		d.add('01010310','01010309','健康','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=6&page=1','','mainFrame');
+		d.add('01010311','010103','语言');
+		d.add('01010312','01010311','语言','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=7&page=1','','mainFrame');
 
 		d.add('010114','0101','我的绘本','${pageContext.request.contextPath}/bookTeacher_findSelfAllBook?page=1','','mainFrame');
 		
-		d.add('0102','01','绘本教案');
+	/* 	d.add('0102','01','绘本教案论坛');
 		d.add('010201','0102','教案论坛','${pageContext.request.contextPath}/bookTeacher_bookForum','','mainFrame');	
-		d.add('010202','0102','我的教案','${pageContext.request.contextPath}/bookTeacher_findSelfNotes','','mainFrame');
+		d.add('010202','0102','我的教案','${pageContext.request.contextPath}/bookTeacher_findSelfNotes','','mainFrame'); */
 		
 		d.add('0103','01','学生管理');
 		d.add('010301','0103','学生管理','${pageContext.request.contextPath}/studentTeacher_findStudentAll?page=1','','mainFrame');

@@ -99,7 +99,7 @@ public class TeacherAction extends ActionSupport implements ModelDriven<Teacher>
 				existTeacher.setLogin_count(count+1);
 			}
 			existTeacher.setLast_login_time(TimeHelper.getCurrentTime());
-			existTeacher.setLogin_state(1);
+			//existTeacher.setLogin_state(1);
 			teacherService.update(existTeacher);
 			ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existTeacher);
 			//System.out.println("登录成功");
@@ -162,7 +162,7 @@ public class TeacherAction extends ActionSupport implements ModelDriven<Teacher>
 	 * */
 	public void quit() {
 		Teacher t = (Teacher)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
-		t.setLogin_state(0);
+		//t.setLogin_state(0);
 		teacherService.update(t);
 		System.out.println("教师用户退出了系统了");
 		ServletActionContext.getRequest().getSession().removeAttribute("existAdmin");

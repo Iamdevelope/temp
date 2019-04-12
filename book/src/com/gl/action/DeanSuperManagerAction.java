@@ -90,6 +90,7 @@ public class DeanSuperManagerAction extends ActionSupport implements ModelDriven
 	public String update() {
 		//System.out.println("更新院长用户时，院长的名字："+dean.getName());
 		dean.setManager(dean.getManager());
+		System.out.println("***********"+Long.parseLong(dean.getPhone_number()));
 		deanService.update(dean);
 		return "updateSuccess";
 	}

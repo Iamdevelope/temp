@@ -37,8 +37,7 @@
 				</tr>
 				<tr>
 					<td align="center" bgColor="#f5fafe">学期：</td>
-					<td bgColor="#ffffff"><s:if test="model.term==0">上学期</s:if>
-					<s:else>下学期</s:else>
+					<td bgColor="#ffffff"><s:property value="model.term"/>
 					</td>
 				</tr>
 				<tr>

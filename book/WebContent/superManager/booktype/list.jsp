@@ -37,9 +37,6 @@ $(document).ready(function(){
 	$('#importBtn').on('click',function(){
 		$('#importModel').dialog('open');
 	});
-	$('#info').on('click',function(){
-		$('#infoPanel').dialog('open');
-	});
 	$('#edit').on('click',function(){
 		$('#editPanel').dialog('open');	
 	});
@@ -109,10 +106,10 @@ function check_book_data(){
 										width="2%">${b.idbooktype}</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="10%">
-										<div id="info"><a
+										<a
 										<%-- href="${pageContext.request.contextPath }/bookTypeSuperManager_infoBookTypePage?idbooktype=${b.idbooktype }" --%> >
 											${b.book_type_name }
-									</a></div>
+									</a>
 									</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="80%">
@@ -235,24 +232,6 @@ function check_book_data(){
 	</form>
 	</div>
 	
-	<div class="easyui-dialog" title="绘本类型详细信息" id="infoPanel" draggable=true modal=true closed=true style="display:black;width:630px;">
-		<form id="bookSuperManager_save_do" name="Form1">
-			<table cellSpacing="1" cellPadding="5" width="100%" align="center"
-				bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
-				<tr>
-					<td align="center" bgColor="#f5fafe" width="20%">绘本类型名：</td>
-					<td bgColor="#ffffff"><s:property value="model.book_type_name" /></td>
-				</tr>
-				<tr>
-					<td align="center" bgColor="#f5fafe" width="20%">类型描述：</td>
-					<td bgColor="#ffffff"><textarea id="book_abstract" rows="5"
-						cols="60" name="book_abstract" onKeyDown="keypress()"
-						onblur="keypress()"><s:property
-							value="model.description" /></textarea></td>
-				</tr>
-			</table>
-		</form>
-	</div>
 	
 	<div id="mm" style="width:12%;">
 		<div id="addPage">

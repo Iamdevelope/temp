@@ -9,6 +9,9 @@
         </id>
         <property name="softwareCode"/>
         <property name="computerCode"/>
+        <property name="used"/>
+        <property name="time"/>
+        <property name="addtime"/>
         
         <many-to-one name="dean" lazy="false" class="com.gl.model.Dean" column="did"/>
     </class>

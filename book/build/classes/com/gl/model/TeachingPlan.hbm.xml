@@ -9,8 +9,10 @@
         </id>
         <property name="teaching_plan_name"/>
         <property name="teaching_path"/>
+        <property name="book_class"></property>
         
-		<many-to-one name="book" class="com.gl.model.Book" unique="true" column="bid">
-		</many-to-one>
+		<many-to-one name="book" class="com.gl.model.Book" unique="true" column="bid"/>
+		<many-to-one name="booktype" lazy="false" class="com.gl.model.BookType" column="idbooktype"/>
+		<many-to-one name="booktheme" lazy="false" class="com.gl.model.BookTheme" column="idbooktheme" />
     </class>
 </hibernate-mapping>

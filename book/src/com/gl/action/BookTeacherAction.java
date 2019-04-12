@@ -7,9 +7,11 @@ import org.apache.struts2.ServletActionContext;
 import com.gl.model.Book;
 import com.gl.model.Book_Teacher;
 import com.gl.model.Teacher;
+import com.gl.model.TeachingPlan;
 import com.gl.service.BookService;
 import com.gl.service.BookTeacherService;
 import com.gl.service.TeacherBookService;
+import com.gl.service.TeachingPlanService;
 import com.gl.utils.FileHelper;
 import com.gl.utils.PageBean;
 import com.opensymphony.xwork2.ActionContext;
@@ -105,6 +107,16 @@ public class BookTeacherAction extends ActionSupport implements ModelDriven<Book
 	public void setTeacherBookService(TeacherBookService teacherBookService) {
 		this.teacherBookService=teacherBookService;
 	}
+	private TeachingPlanService teachingPlanService;
+	
+	public TeachingPlanService getTeachingPlanService() {
+		return teachingPlanService;
+	}
+
+	public void setTeachingPlanService(TeachingPlanService teachingPlanService) {
+		this.teachingPlanService = teachingPlanService;
+	}
+
 	public String add() {
 		//System.out.println("需要添加的绘本的id："+book.getBid());
 		Teacher teacher = (Teacher)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
@@ -167,6 +179,17 @@ public class BookTeacherAction extends ActionSupport implements ModelDriven<Book
 		ServletActionContext.getRequest().getSession().setAttribute("type", book_type);
 		return "findBookAll";
 	}
+	
+	/*
+	 * 绘本教案
+	 * */
+	public String findTeachingPlan() {
+		PageBean<TeachingPlan> pageBean = teachingPlanService.findAllTeachingPlanByBookTypeId(btype, page);
+		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		
+		return "findTeachingPlan";
+	}
+	
 	public String findSelfAllBook() {
 		Teacher	teacher = (Teacher)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
 		if(teacher==null) {
@@ -224,10 +247,11 @@ public class BookTeacherAction extends ActionSupport implements ModelDriven<Book
 		if(bookService.isAdd(book.getBid(), teacher.getTid())) {
 			book.setIsadd(0);
 		}
-		String p = ServletActionContext.getRequest().getServletContext().getRealPath("images");
+		ActionContext.getContext().getValueStack().set("book_type", book_type);
+		String p = ServletActionContext.getRequest().getServletContext().getRealPath("bookImages");
 		//System.out.println("***************this is by show of path:"+p);
 		//System.out.println("该绘本的id："+bid+"***********通过实体获取的绘本id："+book.getBid()+"*****该绘本图片保存的路径为："+book.getBook_path()+"***该绘本所属类型："+btype);
-		List<String> list = FileHelper.traverseFolder(p+"/"+book.getName());
+		List<String> list = FileHelper.traverseFolder(p+"\\"+book.getName());
 		if(list!=null) {
 			String path = "";
 			for(int i=0;i<list.size();i++) {

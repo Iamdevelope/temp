@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excel id="teacher" code="teacher" name="绘本主题表-中班">
+    <colgroup>
+        <col index="A" width='17em'></col>
+        <col index="B" width='17em'></col>
+        <col index="C" width='17em'></col>
+        <col index="D" width='100em'></col>
+    </colgroup>
+    <title>
+        <tr height="30px">
+            <td rowspan="1" colspan="4" value="绘本主题表-中班" />
+        </tr>
+    </title>
+    <thead>
+        <tr height="30px">
+            <th value="主题名" />
+            <th value="所属班级类型" />
+            <th value="学期" />
+            <th value="描述" />
+        </tr>
+    </thead>
+    <tbody>
+        <tr height="30px" firstrow="2" firstcol="0" repeat="0">
+            <td type="string" isnullable="false" maxlength="50" /><!--主题名 -->
+            <td type="string" isnullable="false" maxlength="50" /><!--所属班级类型 -->
+            <td type="string" isnullable="false" maxlength="20"/><!--学期 -->
+            <td type="string" isnullable="false" maxlength="300" /><!--描述 -->
+        </tr>
+    </tbody>
+</excel>

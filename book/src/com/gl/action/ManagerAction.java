@@ -83,7 +83,7 @@ public class ManagerAction extends ActionSupport implements ModelDriven<Manager>
 				existAdmin.setLogin_count(count+1);
 			}
 			existAdmin.setLast_login_time(TimeHelper.getCurrentTime());
-			existAdmin.setLogin_state(1);
+			//existAdmin.setLogin_state(1);
 			managerService.update(existAdmin);
 			ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existAdmin);
 			//System.out.println("登录成功");
@@ -147,7 +147,7 @@ public class ManagerAction extends ActionSupport implements ModelDriven<Manager>
 	 * */
 	public void quit() {
 		Manager m = (Manager)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
-		m.setLogin_state(0);
+		//m.setLogin_state(0);
 		managerService.update(m);
 				
 		ServletActionContext.getRequest().getSession().removeAttribute("existAdmin");

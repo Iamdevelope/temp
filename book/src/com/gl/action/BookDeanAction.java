@@ -164,10 +164,10 @@ public class BookDeanAction extends ActionSupport implements ModelDriven<Book> {
 		
 		book=bookService.findBookById(book.getBid());
 		book.setType(btype);
-		
-		String p = ServletActionContext.getRequest().getServletContext().getRealPath("images");
-		//System.out.println("***************this is by show of path:"+p);
-		//System.out.println("该绘本的id："+bid+"***********通过实体获取的绘本id："+book.getBid()+"*****该绘本图片保存的路径为："+book.getBook_path()+"***该绘本所属类型："+btype);
+		ActionContext.getContext().getValueStack().set("book_type", book_type);
+		String p = ServletActionContext.getRequest().getServletContext().getRealPath("bookImages");
+		System.out.println("***************this is by show of path:"+p);
+		System.out.println("***********通过实体获取的绘本id："+book.getBid()+"*****该绘本图片保存的路径为："+book.getBook_path()+"***该绘本所属类型："+btype);
 		List<String> list = FileHelper.traverseFolder(p+"\\"+book.getName());
 		if(list!=null) {
 			String path = "";

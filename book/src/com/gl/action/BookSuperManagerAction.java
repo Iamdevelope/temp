@@ -29,6 +29,8 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 import com.gl.model.Book;
+import com.gl.model.BookTheme;
+import com.gl.model.BookType;
 import com.gl.service.BookService;
 import com.gl.utils.ExcelHelper;
 import com.gl.utils.FileHelper;
@@ -69,10 +71,10 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		this.bookService = bookService;
 	}
 
-	private String book_type;
 	private String book_class;
 	private String book_theme;
 	
+	private String book_type;
 	private Integer btype;
 	private String templateName;
 	private String templateDownId;
@@ -162,6 +164,7 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		ServletActionContext.getRequest().getSession().setAttribute("book_type", book.getBook_type());
 		ServletActionContext.getRequest().getSession().setAttribute("btype", btype);
 		book.setScore(temp.getScore());
+		book.setBooktype(temp.getBooktype());
 		book.setBooktype(book.getBooktype());
 		bookService.update(book);
 		return "updateSuccess";
@@ -180,15 +183,26 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		return "deleteSuccess";
 	}
 	public String save() {
-		book.setAddtime(TimeHelper.getCurrentTime());
-		book.setScore(UUIDUtils.getRandomNum(3, 5));
-		book.setBook_used_count(UUIDUtils.getRandomNum(100, 1000));
-		String page=ServletActionContext.getRequest().getServletContext().getRealPath("images")+"/"+book.getName();
-		ServletActionContext.getRequest().getSession().setAttribute("book_type", book.getBook_type());
-		ServletActionContext.getRequest().getSession().setAttribute("btype", btype);
-		
-		book.setBook_path(page);
-		bookService.save(book);
+		Book temp = bookService.findBookByName(book.getName());
+		BookType booktype = bookService.findBookTypeByName(book.getBook_type());
+		BookTheme booktheme = bookService.findBookThemeByName(book.getBook_theme());
+		if(temp==null) {
+			if(booktype!=null) {
+				book.setBooktype(booktype);
+			}
+			if(booktheme!=null) {
+				book.setBooktheme(booktheme);
+			}
+			book.setAddtime(TimeHelper.getCurrentTime());
+			book.setScore(UUIDUtils.getRandomNum(3, 5));
+			book.setBook_used_count(UUIDUtils.getRandomNum(100, 1000));
+			String page="\\bookImages\\"+book.getName();
+			ServletActionContext.getRequest().getSession().setAttribute("book_type", book.getBook_type());
+			ServletActionContext.getRequest().getSession().setAttribute("btype", btype);
+			
+			book.setBook_path(page);
+			bookService.save(book);
+		}
 		return "saveSuccess";
 	}
 	public String edit() {
@@ -200,6 +214,7 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		System.out.println("来自详细信息界面*****当前选中的绘本类型为："+book_type+"****以及当前页面为："+page+"****以及btype:"+btype);
 		book=bookService.findBookById(book.getBid());
 		book.setType(btype);
+		ActionContext.getContext().getValueStack().set("book_type", book_type);
 		return "infoPage";
 	}
 	private Integer page;
@@ -270,6 +285,9 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		//System.out.println("搜索成功,共有   "+pageBean.getList().size()+"   个结果");
 		return "selectSuccess";
 	}
+	public String upload() {
+		return "upload";
+	}
 	/*
 	 * 绘本预览界面
 	 * */
@@ -278,11 +296,11 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 		
 		book=bookService.findBookById(book.getBid());
 		book.setType(btype);
-		
-		String p = ServletActionContext.getRequest().getServletContext().getRealPath("images");
+		ActionContext.getContext().getValueStack().set("book_type", book_type);
+		String p = ServletActionContext.getRequest().getServletContext().getRealPath("bookImages");
 		System.out.println("***************this is by show of path:"+p);
 		System.out.println("该绘本的id："+bid+"***********通过实体获取的绘本id："+book.getBid()+"*****该绘本图片保存的路径为："+book.getBook_path()+"***该绘本所属类型："+btype);
-		List<String> list = FileHelper.traverseFolder(p+"/"+book.getName());
+		List<String> list = FileHelper.traverseFolder(p+"/"+book_type+"/"+book.getName());
 		if(list!=null) {
 			String path = "";
 			for(int i=0;i<list.size();i++) {
@@ -371,9 +389,17 @@ public class BookSuperManagerAction extends ActionSupport implements ModelDriven
 							book.setBook_class(value);
 							break;
 						case 2:
+							BookType booktype = bookService.findBookTypeByName(value);
+							if(booktype!=null) {
+								book.setBooktype(booktype);
+							}
 							book.setBook_type(value);
 							break;
 						case 3:
+							BookTheme booktheme = bookService.findBookThemeByName(value);
+							if(booktheme!=null) {
+								book.setBooktheme(booktheme);
+							}
 							book.setBook_theme(value);
 							break;
 						case 4:

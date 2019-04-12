@@ -182,6 +182,8 @@ function createXmlHttp(){
 								<td align="center" width="17%">软件注册码</td>
 								<td align="center" width="8%">用户计算机码</td>
 								<td width="8%" align="center">所属用户</td>
+								<td width="8%" align="center">是否激活</td>
+								<td width="8%" align="center">有效期</td>
 								<td width="8%" align="center">编辑</td>
 							</tr>
 							<c:if test="${pageBean.list.size()>0 }">
@@ -198,13 +200,23 @@ function createXmlHttp(){
 												${b.softwareCode }
 										</a></td>
 										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
-											width="8%"><%-- <s:property value="#b.book_type" /> --%>
+											width="8%">
 											${b.computerCode }
 											</td>
 										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
-											width="8%"><%-- <s:property value="#b.book_class" /> --%>
+											width="8%">
 											${b.dean.getName()}
-											</td>
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
+											width="8%">
+											<c:if test="${b.used==0 }">未激活</c:if>
+											<c:if test="${b.used==1 }">已激活</c:if>
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
+											width="8%">
+											${b.time }
+										</td>
+											
 										<td align="center" style="HEIGHT: 30px"><a
 											href="${ pageContext.request.contextPath }/softwareCode_edit?softwareid=${b.softwareId }">
 												<img
@@ -244,7 +256,7 @@ function createXmlHttp(){
 	</form>
 	</div>
 	
-	<div class="easyui-dialog" title="生成软件码" id="addModel" draggable=true modal=true closed=true style="display:black;width:500px;height:135px" >
+	<div class="easyui-dialog" title="生成软件码" id="addModel" draggable=true modal=true closed=true style="display:black;width:500px;height:165px" >
 		<form id="teacher_save_do" name="Form1">
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -266,6 +278,25 @@ function createXmlHttp(){
 					onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
 					onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
 					id="computer_code" style="color:#999999;width:240px;"/></td>
+			</tr>
+			<tr>
+				<td width="40%" align="center" bgColor="#f5fafe" class="ta_01">
+					<span style="color:red">*</span>有效期：
+				</td>
+				<td class="ta_01" bgColor="#ffffff">
+					<select name="time">
+						<option value="1">1年</option>
+						<option value="2">2年</option>
+						<option value="3">3年</option>
+						<option value="4">4年</option>
+						<option value="5">5年</option>
+						<option value="6">6年</option>
+						<option value="7">7年</option>
+						<option value="8">8年</option>
+						<option value="9">9年</option>
+						<option value="10">10年</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"

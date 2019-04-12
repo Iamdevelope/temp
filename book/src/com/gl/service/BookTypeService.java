@@ -30,6 +30,9 @@ public class BookTypeService {
 	public BookType selectBookTypeById(Integer id) {
 		return bookTypeDao.selectBookTypeById(id);
 	}
+	public BookType findBookTypeByName(String name) {
+		return bookTypeDao.findBookTypeByName(name);
+	}
 	public PageBean<BookType> selectBookTypes(Integer startIndex){
 		PageBean<BookType> pageBean = new PageBean<BookType>();
 		int totalCount=bookTypeDao.selectBookTypeCount();

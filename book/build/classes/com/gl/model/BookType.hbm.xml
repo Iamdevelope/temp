@@ -13,5 +13,10 @@
             <key column="idbooktype"/>
             <one-to-many class="com.gl.model.Book"/>
         </set>
+        
+        <set name="teachingPlan" cascade="delete">
+            <key column="idbooktype"/>
+            <one-to-many class="com.gl.model.TeachingPlan"/>
+        </set>
     </class>
 </hibernate-mapping>

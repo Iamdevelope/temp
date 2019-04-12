@@ -68,6 +68,7 @@
 								<td width="8%" align="center">所属班级类型</td>
 								<td width="8%" align="center">绘本主题</td>
 								<td width="8%" align="center">被使用次数</td>
+								<td width="8%" align="center">使用期限</td>
 								<td width="8%" align="center">评价星级</td>
 								<td width="8%" align="center">移除</td>
 							</tr>
@@ -92,6 +93,8 @@
 										width="8%">${b.book_theme }</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="8%">${b.book_used_count }</td>
+									<td style="cursor:hand;height:30px" align="center" width="8%">
+										${b.teacher_can_use_time }</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="8%">
 										<c:forEach var="i" begin="1" end="${b.score }" >
@@ -143,6 +146,9 @@
 						</s:if> <s:else>
 							<p style="color: blue; font-size: 20px;">您还没有选择所需要使用的绘本，请到绘本列表添加。</p>
 						</s:else></td>
+						<div>
+							<span style="color: red;font-size:20px;"><s:actionerror /></span>
+						</div>
 				</tr>
 			</TBODY>
 		</table>

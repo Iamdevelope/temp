@@ -33,5 +33,6 @@
 		<many-to-one name="booktype" lazy="false" class="com.gl.model.BookType" column="idbooktype"/>
 		<many-to-one name="booktheme" lazy="false" class="com.gl.model.BookTheme" column="idbooktheme"/>
 		<one-to-one name="teaching_plan" class="com.gl.model.TeachingPlan" property-ref="book"/>
+		
 	</class>
 </hibernate-mapping>

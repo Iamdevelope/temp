@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=utf-8" 
 	pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
 	href="${pageContext.request.contextPath }/css/mybase.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/bookInfo.css">
+<script type="text/javascript" src="js/PDFObject.js"></script>
 <LINK href="${pageContext.request.contextPath}/css/Style1.css"
 	type="text/css" rel="stylesheet">
 </head>
@@ -29,6 +30,8 @@
 										value="<s:property value="model.bookImg_path"/>"> <input
 										type="hidden" id="book_path" name="book_path"
 										value="<s:property value="model.book_path"/>"> 
+										<input type="hidden" id="book_type" name="book_type"
+										value="<s:property value="book_type"/>"> 
 										<input type="hidden" id="book_name" value="<s:property value="model.name" />"/>
 									<p>
 										<s:property value="model.name" />
@@ -64,7 +67,14 @@
 									</td>
 								</tr>
 								<tr>
-									
+									<td height="550">
+										<div id="pdf"></div>
+										<!-- <a href="http://www.xdocin.com/xdoc?_func=to&_format=html&_cache=1&_xdoc=http://47.102.133.243/book/teachingplans/1.docx" target="_blank" rel="nofollow">XDOC</a> -->
+										<!-- <iframe id="word" src='' width='100%' height='100%' frameborder='1'>
+										</iframe> -->
+										<!-- <iframe id="word" src='https://view.officeapps.live.com/op/view.aspx?src=http://47.102.133.243/book/teachingplans/后台.xls' width='100%' height='100%' frameborder='1'>
+										</iframe> -->
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -111,8 +121,21 @@ $('.bookmark').on('click','li',function(){
 
 function loadPage(){
 	var img=document.getElementById("firstPage");
+	var iframe = document.getElementById("word");
 	var name=document.getElementById("book_name").value;
-	img.src="../book/images/"+name+"/01.jpg";
+	var book_type = $("input#book_type").val();
+	console.log("------"+book_type);
+	img.src="../book/bookImages/"+name+"/01.jpg";
+	//iframe.src = "http://47.102.133.243/book/teachingplans/"+name+".html";
+	//iframe.src = "https://view.officeapps.live.com/op/view.aspx?src=https://github.com/Iamdevelope/myword/blob/master/"+name+".docx";
+	var url = "http://47.102.133.243/book/teachingplans/"+book_type+"/"+name+".pdf";
+	var options = {
+            height: "550px",
+            pdfOpenParams: {view: 'FitV', page: '0' },
+            name:"mans",
+            fallbackLink: "<p>您的浏览器暂不支持此pdf，请下载最新的浏览器</p>"
+        };
+	PDFObject.embed(url, "#pdf",options);
 }
 </script>
 </body>

@@ -6,7 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath}/css/Style1.css"
 	type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.6/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.6/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="css/bookInfo.css">
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('#book_theme').menubutton({
+		menu:'#mm2'
+	})
+	
+});
 	function keypress(){
 		var text1=document.getElementById("book_abstract").value;
 		var len;
@@ -19,6 +30,19 @@
 		}
 		var show="你还可以输入"+len+"个汉字";
 		document.getElementById("abstract").innerText=show;
+	}
+	function check_book_data(){
+		console.log("点击了确定按钮");
+		var book_name=document.getElementById("bookSuperManager_save_do_logonName").value;
+		var book_theme=document.getElementById("bookSuperManager_save_do_logonName").value;
+		if(book_name==null||book_name==""){
+			alert("绘本名不能为空！");
+			return false;
+		}
+		else if(book_theme==null||book_theme==""){
+			alert("必须需要给当前需要添加的绘本指定一个主题！");
+			return false;
+		}
 	}
 </script>
 </HEAD>
@@ -81,18 +105,10 @@
 				<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
 					<span style="color: red;">*</span>绘本主题：
 				</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="text"
-					name="book_theme" value="" id="bookSuperManager_save_do_logonName"
+				<td class="ta_01" bgColor="#ffffff"><input href="javascript:void(0)"
+					id="book_theme" iconCls="icon-save" value="大班/中班/小班"
 					class="bg" /></td>
 			</tr>
-			<%-- <tr>
-				<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
-					<span style="color: red;">*</span>绘本路径：
-				</td>
-				<td class="ta_01" bgColor="#ffffff"><input type="file"
-					name="book_path" value="选中路径"
-					id="bookSuperManager_save_do_logonName" class="bg" /></td>
-			</tr> --%>
 			<tr>
 				<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">
 					绘本描述：</td>
@@ -105,7 +121,7 @@
 			<tr>
 				<td class="ta_01" style="WIDTH: 100%" align="center"
 					bgColor="#f5fafe" colSpan="4">
-					<button type="submit" id="bookSuperManager_save_do_submit"
+					<button type="submit" id="bookSuperManager_save_do_submit" onclick="return check_book_data()"
 						value="确定" class="button_ok">&#30830;&#23450;</button> <FONT
 					face="宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
 					<button type="reset" value="重置" class="button_cancel">&#37325;&#32622;</button>
@@ -117,5 +133,41 @@
 			</tr>
 		</table>
 	</form>
+	
+	<div id="mm2" class="gl_tab_panel">
+		<div class="gl_service_panel">
+			<h5><a href="javascript:void(0)">大班</a></h5>
+			<p>
+				<a href="javascript:void(0)">我真棒!</a>
+				<a href="javascript:void(0)">好玩的过家家</a>
+				<a href="javascript:void(0)">听到了什么</a>
+				<a href="javascript:void(0)">小兔不要怕</a>
+			</p>
+		</div>
+		<div class="gl_service_panel">
+			<h5><a href="javascript:void(0)">中班</a></h5>
+			<p>
+				<a href="javascript:void(0)">我真棒!</a>
+				<a href="javascript:void(0)">好玩的过家家</a>
+				<a href="javascript:void(0)">听到了什么</a>
+				<a href="javascript:void(0)">小兔不要怕</a>
+			</p>
+		</div>
+		<div class="gl_service_panel">
+			<h5><a href="javascript:void(0)">小班</a></h5>
+			<p>
+				<a href="javascript:void(0)">我真棒!</a>
+				<a href="javascript:void(0)">好玩的过家家</a>
+				<a href="javascript:void(0)">听到了什么</a>
+				<a href="javascript:void(0)">小兔不要怕</a>
+			</p>
+		</div>
+		<div id="addPage">
+			<a  title="新增单本绘本信息" >新增绘本</a>
+		</div>
+		<div id="importBtn">
+			<a title="导入绘本信息">导入绘本信息</a>
+		</div>
+	</div>
 </body>
 </HTML>

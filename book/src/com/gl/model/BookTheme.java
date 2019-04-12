@@ -11,8 +11,9 @@ public class BookTheme {
 	private String theme_name;
 	private String theme_description;
 	private String class_type;
-	private Integer term=0;//表示的是主题属于哪个学期，0代表上学期，1代表下学期
+	private String term;//表示的是主题属于哪个学期
 	private Set<Book> book = new HashSet<Book>();
+	private Set<TeachingPlan> teachingplan = new HashSet<TeachingPlan>();
 	public Integer getIdbooktheme() {
 		return idbooktheme;
 	}
@@ -43,11 +44,17 @@ public class BookTheme {
 	public void setClass_type(String class_type) {
 		this.class_type = class_type;
 	}
-	public Integer getTerm() {
+	public String getTerm() {
 		return term;
 	}
-	public void setTerm(Integer term) {
+	public void setTerm(String term) {
 		this.term = term;
+	}
+	public Set<TeachingPlan> getTeachingplan() {
+		return teachingplan;
+	}
+	public void setTeachingplan(Set<TeachingPlan> teachingplan) {
+		this.teachingplan = teachingplan;
 	}
 	
 }

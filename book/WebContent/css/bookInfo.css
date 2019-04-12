@@ -23,16 +23,17 @@ body {
 	position:left;
 }
 .gl_book_content{
-	width:80%;
+	width:60%;
 	position:left;
 	/* padding-left:50%; */
 	padding-left:850px;
 	padding-top:2%;
+	padding-right:20px;
 }
 .gl_book_assess{
 	position:left;
 	/* padding-top:30%; */
-	padding-top:600px;
+	padding-top:10px;
 	padding-left:35%;
 }
 .gl_book_assess span{
@@ -45,7 +46,7 @@ body {
 }
 .gl_book_assess span:hover{
 	cursor:pointer;
-	background-color:#c0c0c0;
+	background-color:#ff5000;
 }
 .gl_book_page{
 	position: absolute;
@@ -79,4 +80,31 @@ body {
 }
 input{
 	cursor:pointer;
+}
+.gl_tab_panel{
+	width:692px;
+	height:580px;
+	border:2px solid #5badff;
+	color:#000000;
+	font-size:16px;
+}
+.gl_service_panel{
+	margin-bottom:5px;
+}
+.gl_service_panel h5{
+	position:relative;
+	height:36px;
+	line-height:16px;
+	font-size:16px;
+	color:#000000;
+}
+.gl_service_panel p{
+	position:left;
+	overflow:hidden;
+}
+.gl_service_panel p a{
+	position:left;
+	line-height:16px;
+	padding:2px;
+	overflow:hidden;
 }

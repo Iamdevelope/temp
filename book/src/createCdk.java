@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import com.gl.utils.UUIDUtils;
 
 public class createCdk {
 	
@@ -18,13 +21,76 @@ public class createCdk {
 
 	private static String prefix = "00";//前缀 可以扩展
 	private static Set<String> cdks = new HashSet<>();//用于存储cdks
+	private static Long dest = 2L;
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 	    //测试
-	    generateCdks(prefix);
+	    /*generateCdks(prefix);
 	    for (int i = 0; i < 50; i++) {
 	        System.out.println(takeOneCdk());
-	    }
+	    }*/
+		String temp = generateCode(27,Long.valueOf("12345678902"),10);
+		
+	    System.out.println(temp);
+	}
+	public static String generateCode(Integer pf,Long num,int index) {
+		int temp = pf & 1001;
+		
+		String p = Long.toString(temp);
+		generateCdks(p);
+		String prefix = takeOneCdk();
+		String time = generateCode();
+		String phone = Long.toString(num,16);
+		String suffix = suffixToString(index*6688);
+		String result = prefix+"-"+time+"-"+phone+"-"+suffix;
+		result = result.toUpperCase();
+		result = result.replaceAll("O", "o");
+		return result;
+	}
+	private static String suffixToString(int digits) {
+		int temp = digits ^ 0xff;
+		return Long.toString(temp*32,16);
+	}
+	private static int[] getTime(String time) {
+		int[] results = new int[6];
+		String[] s1 = time.split(" ");
+		String[] s2 = s1[0].split("-");
+		for(int i=0;i<s2.length;i++) {
+			results[i]=Integer.parseInt(s2[i]);
+		}
+		String[] s3 = s1[1].split(":");
+		for(int i=3;i<s3.length*2;i++) {
+			results[i]=Integer.parseInt(s3[i-3]);
+		}
+		return results;
+	}
+	private static String generateCode() {
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONDAY);
+		int day = calendar.get(Calendar.DATE);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		year = year / UUIDUtils.getRandomNum(20, 99);
+//		month = month * UUIDUtils.getRandomNum(16, 36);
+//		day = day * UUIDUtils.getRandomNum(16, 20);
+		System.out.println("year: "+intToString(year)+" month: "+intToString(month+1)+" day: "+intToString(day)+" hour: "+intToString(hour)+" minute: "+intToString(minute)+" second: "+intToString(second));
+		System.out.println("拼接好的code："+toString(year,(month+1),day,hour,minute,second));
+		return toString(year,(month+1),day,hour,minute,second);
+	}
+	private static String toString(int ...is) {
+		String temp = "";
+		for(int i:is) {
+			temp+=intToString(i);
+		}
+		return temp;
+	}
+	private static String intToString(int i) {
+		return Long.toString(i,16);
 	}
 
 	/**

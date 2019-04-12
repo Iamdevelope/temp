@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excel id="art" code="art" name="绘本教案信息表">
+    <colgroup>
+        <col index="A" width='30em'></col>
+        <col index="B" width='17em'></col>
+        <col index="C" width='17em'></col>
+        <col index="D" width='17em'></col>
+        <col index="E" width='30em'></col>
+    </colgroup>
+    <title>
+        <tr height="30px">
+            <td rowspan="1" colspan="5" value="绘本教案信息表" />
+        </tr>
+    </title>
+    <thead>
+        <tr height="30px">
+            <th value="教案名称" />
+            <th value="所属班级" />
+            <th value="对应绘本" />
+            <th value="教案类型" />
+            <th value="主题" />
+        </tr>
+    </thead>
+    <tbody>
+        <tr height="30px" firstrow="2" firstcol="0" repeat="0">
+            <td type="string" isnullable="false" maxlength="50" /><!--教案名城 -->
+            <td type="string" isnullable="false" maxlength="50"/><!--绘本所属班级 -->
+            <td type="string" isnullable="false" maxlength="50"/><!--对应绘本 -->
+            <td type="string" isnullable="false" maxlength="30" /><!--教案类型 -->
+            <td type="string" isnullable="false" maxlength="100" /><!--主题 -->
+        </tr>
+    </tbody>
+</excel>

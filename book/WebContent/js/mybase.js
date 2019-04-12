@@ -4,6 +4,7 @@ $(function(){
     var bookImg_path=$("input#bookImg_path").val();
     var book_path=$("input#book_path").val();
     var book_name=$("input#book_name").val();
+    var book_type = $('input#book_type').val();
     list=bookImg_path.split("|");
     creat_html(list,book_name)
 
@@ -27,19 +28,19 @@ $(function(){
                 }
                 
                 if(i<=1){
-                	var p_pImg = '<div class="coverR"><img style="position:absolute;top:0px;left:-283px;height:340px;width:556px;" src="../book/images/'+p_img+'"/></div>';
+                	var p_pImg = '<div class="coverR"><img style="position:absolute;top:0px;left:-283px;height:340px;width:559px;" src="../book/bookImages/'+book_type+"/"+p_img+'"/></div>';
                     p_page+='<div class="page_d">'+p_pImg+'<p class="next_page" style="display:'+isshow+'">下一页</p></div>';
                 }else if(i<data.length){
-                	var p_pImg = '<div class="coverR"><img style="position:absolute;top:0px;left:-274px;height:340px;width:556px;" src="../book/images/'+p_img+'"/></div>';
+                	var p_pImg = '<div class="coverR"><img style="position:absolute;top:0px;left:-274px;height:340px;width:556px;" src="../book/bookImages/'+book_type+"/"+p_img+'"/></div>';
                     p_page+='<div class="page_d">'+p_pImg+'<p class="next_page" style="display:'+isshow+'">下一页</p></div>';
                 }
                 
                 if(i==0){
-                	p_page += '<div class="page_L1 cover"><img style="position:absolute;height:340px;width:577px;" src="../book/images/'+book_name+"/"+data[i+1]+'" alt="">' +
+                	p_page += '<div class="page_L1 cover"><img style="position:absolute;height:340px;width:577px;" src="../book/bookImages/'+book_type+"/"+book_name+"/"+data[i+1]+'" alt="">' +
                 	'<p class="pre_page">上一页</p> ' +
                 	'</div>'
                 }else if(i<data.length-1){
-                	p_page += '<div class="page_L1 cover"><img style="position:absolute;height:340px;width:600px;" src="../book/images/'+book_name+"/"+data[i+1]+'" alt="">' +
+                	p_page += '<div class="page_L1 cover"><img style="position:absolute;height:340px;width:600px;" src="../book/bookImages/'+book_type+"/"+book_name+"/"+data[i+1]+'" alt="">' +
                 	'<p class="pre_page">上一页</p> ' +
                 	'</div>'
                 }

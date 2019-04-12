@@ -7,6 +7,7 @@
 	<constant name="struts.devMode" value="false" />        <!-- 设置了程序的运行模式 -->
 	<constant name="struts.locale" value="zh_CN" />         <!-- 设置程序运行所使用的locale -->
 	<constant name="struts.i18n.encoding" value="utf-8" />  <!-- 设置程序运行时用的编码方式 -->
+	
 
 	<package name="book" extends="struts-default" namespace="/">
 
@@ -216,6 +217,7 @@
 			<result name="addPage">/superManager/book/add.jsp</result>
 			<result name="selectSuccess">/superManager/book/list.jsp</result>
 			<result name="showPage">/superManager/book/newShow.jsp</result>
+			<result name="upload">/superManager/teachingplan/upload.jsp</result>
 			<result name="importSuccess" type="redirectAction">bookSuperManager_findBookAll?page=1</result>
 			<result name="downData" type="stream">
 	       		<param name="contentType">application/octet-stream</param>
@@ -240,6 +242,14 @@
 			<result name="infoBookThemePage">/superManager/booktheme/info.jsp</result>
 			<result name="update" type="redirectAction">bookThemeSuperManager_booktheme?page=1</result>
 			<result name="save" type="redirectAction">bookThemeSuperManager_booktheme?page=1</result>
+			<result name="importSuccess" type="redirectAction">bookThemeSuperManager_booktheme?page=1</result>
+			<result name="deleteSuccess" type="redirectAction">bookThemeSuperManager_booktheme?page=1</result>
+			<result name="downData" type="stream">
+	       		<param name="contentType">application/octet-stream</param>
+	       		<param name="inputName">inputStream</param>
+	       		<param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+	       		<param name="bufferSize">8192</param>
+	       	</result>
 		</action>
 		<!-- 超级管理员管理学生模块 -->
 		<action name="studentSuperManager_*"
@@ -343,7 +353,7 @@
 			<result name="editPage">/dean/book/edit.jsp</result>
 			<result name="updateSuccess" type="redirectAction">bookDean_findBookAll?page=1
 			</result>
-			<result name="infoPage">/dean/book/info.jsp</result>
+			<result name="infoPage">/dean/book/newShow.jsp</result>
 			<result name="saveSuccess" type="redirectAction">bookDean_findBookAll?page=1
 			</result>
 			<result name="addPage">/dean/book/add.jsp</result>
@@ -422,6 +432,37 @@
 		    <result name="infoPage">/superManager/softwarecode/info.jsp</result>
 		    <result name="editPage">/superManager/softwarecode/edit.jsp</result>
 		    <result name="error">/superManager/softwarecode/list.jsp</result>
+		</action>
+		
+		<action name="teachingPlan_*" class="teachingPlanAction" method="{1}">
+		    <result name="findAllTeachingPlan">/superManager/teachingplan/list.jsp</result>
+		    <result name="infoPage">/superManager/teachingplan/newShow.jsp</result>
+		    <result name="editPage">/superManager/teachingplan/edit.jsp</result>
+		    <result name="saveSuccess" type="redirectAction">teachingPlan_findTeachingPlans?page=1</result>
+		    <result name="deleteSuccess" type="redirectAction">teachingPlan_findTeachingPlans?page=1</result>
+		    <result name="upload">/superManager/teachingplan/upload.jsp</result>
+		    <result name="importSuccess" type="redirectAction">teachingPlan_findTeachingPlans?page=1</result>
+		    <result name="downData" type="stream">
+	       		<param name="contentType">application/octet-stream</param>
+	       		<param name="inputName">inputStream</param>
+	       		<param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+	       		<param name="bufferSize">8192</param>
+	       	</result>
+		</action>
+		<action name="userTeachingPlan_*" class="teachingPlanAction" method="{1}">
+		    <result name="findAllTeachingPlan">/teacher/teachingplan/list.jsp</result>
+		    <result name="infoPage">/teacher/teachingplan/newShow.jsp</result>
+		    <result name="editPage">/teacher/teachingplan/edit.jsp</result>
+		    <result name="saveSuccess" type="redirectAction">userTeachingPlan_findTeachingPlans</result>
+		    <result name="deleteSuccess" type="redirectAction">userTeachingPlan_findTeachingPlans</result>
+		    <result name="upload">/teacher/teachingplan/upload.jsp</result>
+		    <result name="importSuccess" type="redirectAction">userTeachingPlan_findTeachingPlans</result>
+		    <result name="downData" type="stream">
+	       		<param name="contentType">application/octet-stream</param>
+	       		<param name="inputName">inputStream</param>
+	       		<param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+	       		<param name="bufferSize">8192</param>
+	       	</result>
 		</action>
 	</package>
 </struts>

@@ -85,7 +85,7 @@ public class DeanAction extends ActionSupport implements ModelDriven<Dean> {
 				existDean.setLogin_count(count+1);
 			}
 			existDean.setLast_login_time(TimeHelper.getCurrentTime());
-			existDean.setLogin_state(1);
+			//existDean.setLogin_state(1);
 			deanService.update(existDean);
 			ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existDean);
 			//System.out.println("login success");
@@ -145,7 +145,7 @@ public class DeanAction extends ActionSupport implements ModelDriven<Dean> {
 	}
 	public void quit() {
 		Dean dean = (Dean)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
-		dean.setLogin_state(0);
+		//dean.setLogin_state(0);
 		//System.out.println("退出成功，将该用户的登录状态更改。");
 		deanService.update(dean);
 		ServletActionContext.getRequest().getSession().removeAttribute("existAdmin");

@@ -21,6 +21,7 @@ public class Book {
 	private String resources_path;//绘本的资源下载路径
 	private Integer type;
 	private String bookImg_path;//绘本中所有的绘本页面图片路径
+	private String teacher_can_use_time;//教师对该绘本使用时间限制
 	private Set<Teacher> teacher=new HashSet<Teacher>();
 	private Set<TeacherBook> teacherbook = new HashSet<TeacherBook>();
 	private BookType booktype;
@@ -159,6 +160,12 @@ public class Book {
 	}
 	public void setTeaching_plan(TeachingPlan teachingPlan) {
 		this.teaching_plan = teachingPlan;
+	}
+	public String getTeacher_can_use_time() {
+		return teacher_can_use_time;
+	}
+	public void setTeacher_can_use_time(String teacher_can_use_time) {
+		this.teacher_can_use_time = teacher_can_use_time;
 	}
 	
 }

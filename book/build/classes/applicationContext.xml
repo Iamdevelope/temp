@@ -229,6 +229,10 @@
 	<!-- 配置软件注册码 -->
 	<bean id="softwareCodeAction" class="com.gl.action.SoftwareCodeAction" scope="prototype">
 	    <property name="softwareCodeService" ref="softwareCodeService"/>
+	    <property name="deanService" ref="deanService"/>
+	</bean>
+	<bean id="teachingPlanAction" class="com.gl.action.TeachingPlanAction" scope="prototype">
+	    <property name="teachingPlanService" ref="teachingPlanService"/>
 	</bean>
 
 	<!-- Service配置 -->
@@ -273,6 +277,9 @@
 	<bean id="softwareCodeService" class="com.gl.service.SoftwareCodeService" scope="prototype">
 	    <property name="softwareCodeDao" ref="softwareCodeDao" />
 	</bean>
+	<bean id="teachingPlanService" class="com.gl.service.TeachingPlanService" scope="prototype">
+	    <property name="teachingPlanDao" ref="teachingPlanDao"/>
+	</bean>
 
 	<!-- DAO 配置 -->
 	<bean id="teacherDao" class="com.gl.dao.TeacherDao"
@@ -311,6 +318,9 @@
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<bean id="softwareCodeDao" class="com.gl.dao.SoftwareCodeDao" scope="prototype">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="teachingPlanDao" class="com.gl.dao.TeachingPlanDao" scope="prototype">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

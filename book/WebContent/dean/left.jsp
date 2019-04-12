@@ -32,25 +32,45 @@
 		d.add('010101','0101','教师管理','${pageContext.request.contextPath}/teacherDean_findTeacherAll?page=1','','mainFrame');
 		
 		d.add('0102','01','绘本管理');
-		d.add('010202','0102','社会');
-		d.add('010203','010202','社会','${pageContext.request.contextPath}/bookDean_findBookAll?btype=1&page=1','','mainFrame');
-		d.add('010204','0102','科学');
-		d.add('010205','010204','数学','${pageContext.request.contextPath}/bookDean_findBookAll?btype=2&page=1','','mainFrame');
-		d.add('010206','010204','探究','${pageContext.request.contextPath}/bookDean_findBookAll?btype=3&page=1','','mainFrame');
-		d.add('010207','0102','艺术');
-		d.add('010208','010207','美术','${pageContext.request.contextPath}/bookDean_findBookAll?btype=4&page=1','','mainFrame');
-		d.add('010209','010207','音乐','${pageContext.request.contextPath}/bookDean_findBookAll?btype=5&page=1','','mainFrame');
-		d.add('010210','0102','健康');
-		d.add('010211','010210','健康','${pageContext.request.contextPath}/bookDean_findBookAll?btype=6&page=1','','mainFrame');
-		d.add('010212','0102','语言');
-		d.add('010213','010212','语言','${pageContext.request.contextPath}/bookDean_findBookAll?btype=7&page=1','','mainFrame');
+		
+		d.add('010202','0102','绘本类型');
+		d.add('01020201','010202','社会');
+		d.add('01020202','01020201','社会','${pageContext.request.contextPath}/bookDean_findBookAll?btype=1&page=1','','mainFrame');
+		d.add('01020203','010202','科学');
+		d.add('01020204','01020203','数学','${pageContext.request.contextPath}/bookDean_findBookAll?btype=2&page=1','','mainFrame');
+		d.add('01020205','01020203','探究','${pageContext.request.contextPath}/bookDean_findBookAll?btype=3&page=1','','mainFrame');
+		d.add('01020206','010202','艺术');
+		d.add('01020207','01020206','美术','${pageContext.request.contextPath}/bookDean_findBookAll?btype=4&page=1','','mainFrame');
+		d.add('01020208','01020206','音乐','${pageContext.request.contextPath}/bookDean_findBookAll?btype=5&page=1','','mainFrame');
+		d.add('01020209','010202','健康');
+		d.add('01020210','01020209','健康','${pageContext.request.contextPath}/bookDean_findBookAll?btype=6&page=1','','mainFrame');
+		d.add('01020211','010202','语言');
+		d.add('01020212','01020211','语言','${pageContext.request.contextPath}/bookDean_findBookAll?btype=7&page=1','','mainFrame');
+		
+		d.add('010203','0102','绘本教案');
+		d.add('01020301','010203','社会');
+		d.add('01020302','01020301','社会','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=1&page=1','','mainFrame');
+		d.add('01020303','010203','科学');
+		d.add('01020304','01020303','数学','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=2&page=1','','mainFrame');
+		d.add('01020305','01020303','探究','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=3&page=1','','mainFrame');
+		d.add('01020306','010203','艺术');
+		d.add('01020307','01020306','美术','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=4&page=1','','mainFrame');
+		d.add('01020308','01020306','音乐','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=5&page=1','','mainFrame');
+		d.add('01020309','010203','健康');
+		d.add('01020310','01020309','健康','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=6&page=1','','mainFrame');
+		d.add('01020311','010203','语言');
+		d.add('01020312','01020311','语言','${pageContext.request.contextPath}/userTeachingPlan_findTeachingPlans?btype=7&page=1','','mainFrame');
+
 		
 		d.add('0103','01','学生管理');
 		d.add('010301','0103','学生管理','${pageContext.request.contextPath}/studentDean_findStudentAll?page=1','','mainFrame');
 		
-		d.add('0104','01','个人中心');
-		d.add('010401','0104','个人信息','${pageContext.request.contextPath}/dean_info?aid=1','','mainFrame');
-		d.add('010402','0104','修改密码','${pageContext.request.contextPath}/dean_updatePasswordPage','','mainFrame');
+		d.add('0104','01','激活码');
+		d.add('010401','0104','我的激活码','${pageContext.request.contextPath}/softwareCodeDean_myCode?page=1','','mainFrame');
+		
+		d.add('0105','01','个人中心');
+		d.add('010501','0105','个人信息','${pageContext.request.contextPath}/dean_info?aid=1','','mainFrame');
+		d.add('010502','0105','修改密码','${pageContext.request.contextPath}/dean_updatePasswordPage','','mainFrame');
 		document.write(d);
 	</script>
 				</div>

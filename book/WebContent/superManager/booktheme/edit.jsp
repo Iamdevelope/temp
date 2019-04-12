@@ -66,8 +66,8 @@
 				<td align="center" bgColor="#f5fafe">学期：</td>
 				<td bgColor="#ffffff">
 					<select name="term">
-						<option value="0" <s:if test="model.term==0">selected</s:if>>上学期</option>
-						<option value="1" <s:if test="model.term==1">selected</s:if>>下学期</option>
+						<option value="上学期" <s:if test="model.term=='上学期'">selected</s:if>>上学期</option>
+						<option value="下学期" <s:if test="model.term=='下学期'">selected</s:if>>下学期</option>
 					</select>
 				</td>
 			</tr>

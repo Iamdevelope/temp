@@ -18,7 +18,7 @@
 		function load(){
 			var img=document.getElementById("fengmian");
 			var name=document.getElementById("book_name").value;
-			img.src="../book/images/"+name+"/fengmian.jpg";
+			img.src="../book/bookImages/"+name+"/fengmian.jpg";
 		}
 	</script>
 </HEAD>

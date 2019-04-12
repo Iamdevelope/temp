@@ -2,16 +2,17 @@ package com.gl.action;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.gl.model.Book;
 import com.gl.model.Dean;
 import com.gl.model.SoftwareCode;
+import com.gl.service.DeanService;
 import com.gl.service.SoftwareCodeService;
+import com.gl.utils.CreateCdkUtils;
 import com.gl.utils.PageBean;
+import com.gl.utils.TimeHelper;
 import com.gl.utils.UUIDUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,6 +30,7 @@ public class SoftwareCodeAction extends ActionSupport implements ModelDriven<Sof
 		return softwareCode;
 	}
 	private SoftwareCodeService softwareCodeService;
+	private DeanService deanService;
 	private Integer page;
 	private String deanName;
 	private String computer_code;
@@ -60,6 +62,13 @@ public class SoftwareCodeAction extends ActionSupport implements ModelDriven<Sof
 		System.out.println("当前显示的页面："+page);
 		this.page = page;
 	}
+	
+	public DeanService getDeanService() {
+		return deanService;
+	}
+	public void setDeanService(DeanService deanService) {
+		this.deanService = deanService;
+	}
 	public SoftwareCodeService getSoftwareCodeService() {
 		return softwareCodeService;
 	}
@@ -78,6 +87,12 @@ public class SoftwareCodeAction extends ActionSupport implements ModelDriven<Sof
 			this.addActionError("添加失败，没有找到对应的院长用户。");
 			return NONE;
 		}
+		if(dean.getCan_regist_count()<dean.getRegisted_count()+1) {
+			this.addActionError("添加失败，该用户已达到最大注册数量，如需要继续，请联系客服升级权限。");
+			return NONE;
+		}
+		dean.setRegisted_count(dean.getRegisted_count()+1);
+		deanService.update(dean);
 		softwareCode.setDean(dean);
 		softwareCodeService.save(softwareCode);
 		return "saveSuccess";
@@ -120,7 +135,7 @@ public class SoftwareCodeAction extends ActionSupport implements ModelDriven<Sof
 		return "findCodeByDid";
 	}
 	public String generateCode() throws IOException {
-		System.out.println("当前需要注册的计算机码："+computer_code+"。所属的院长为："+deanName);
+		System.out.println("当前需要注册的计算机码："+computer_code+"。所属的院长为："+deanName+"添加的年限："+softwareCode.getTime());
 		Dean dean = softwareCodeService.findDeanByName(deanName);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
@@ -129,14 +144,26 @@ public class SoftwareCodeAction extends ActionSupport implements ModelDriven<Sof
 			//this.addActionError("需要添加的院长不存在，请确认输入内容是否正确。");
 			return NONE;
 		}
+		if(dean.getCan_regist_count()<dean.getRegisted_count()+1) {
+			response.getWriter().println("添加失败，该用户已达到最大注册数量，如需要继续，请联系客服升级权限。");
+			return NONE;
+		}
 		SoftwareCode code = softwareCodeService.findCodeByComputerCode(computer_code,dean.getDid());
 		if(code!=null) {
 			response.getWriter().println("该计算机已经注册，请更换电脑进行添加！");
 			return NONE;
 		}
-		String sC=UUIDUtils.getUUIDNoFormat();
+		dean.setRegisted_count(dean.getRegisted_count()+1);
+		deanService.update(dean);
+		String sC=CreateCdkUtils.generateCode(dean.getDid(), Long.valueOf(dean.getPhone_number()), dean.getRegisted_count()+1);
+		if(softwareCode.getTime()!=null) {
+			softwareCode.setTime(TimeHelper.getCurrentYear(Integer.parseInt(softwareCode.getTime())));
+		}else {
+			softwareCode.setTime(TimeHelper.getCurrentYear(1));
+		}
 		softwareCode.setComputerCode(computer_code);
 		softwareCode.setDean(dean);
+		softwareCode.setAddtime(TimeHelper.getCurrentTime());
 		softwareCode.setSoftwareCode(sC);
 		softwareCodeService.save(softwareCode);
 		response.getWriter().println("生成注册码成功！"+softwareCode.getSoftwareCode());

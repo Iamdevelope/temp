@@ -34,22 +34,46 @@
 		d.add('0102','01','园长管理');
 		d.add('010201','0102','园长管理','${pageContext.request.contextPath}/deanManager_findDeanAll?page=1','','mainFrame');
 		
-		d.add('0103','01','绘本管理');
-		d.add('010302','0103','社会');
-		d.add('010303','010302','社会','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=1&page=1','','mainFrame');
-		d.add('010304','0103','科学');
-		d.add('010305','010304','数学','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=2&page=1','','mainFrame');
-		d.add('010306','010304','探究','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=3&page=1','','mainFrame');
-		d.add('010307','0103','艺术');
-		d.add('010308','010307','美术','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=4&page=1','','mainFrame');
-		d.add('010309','010307','音乐','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=5&page=1','','mainFrame');
-		d.add('010310','0103','健康');
-		d.add('010311','010310','健康','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=6&page=1','','mainFrame');
-		d.add('010312','0103','语言');
-		d.add('010313','010312','语言','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=7&page=1','','mainFrame');
+		d.add('0103','01','学生管理');
+		d.add('010301','0103','学生管理','${pageContext.request.contextPath}/studentSuperManager_findStudentAll?page=1','','mainFrame');
 		
-		d.add('0104','01','学生管理');
-		d.add('010401','0104','学生管理','${pageContext.request.contextPath}/studentSuperManager_findStudentAll?page=1','','mainFrame');
+		d.add('0104','01','绘本管理');
+		d.add('010401','0104','绘本管理');
+		d.add('01040101','010401','社会');
+		d.add('0104010101','01040101','社会','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=1&page=1','','mainFrame');
+		d.add('01040102','010401','科学');
+		d.add('0104010201','01040102','数学','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=2&page=1','','mainFrame');
+		d.add('0104010202','01040102','探究','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=3&page=1','','mainFrame');
+		d.add('01040103','010401','艺术');
+		d.add('0104010301','01040103','美术','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=4&page=1','','mainFrame');
+		d.add('0104010302','01040103','音乐','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=5&page=1','','mainFrame');
+		d.add('01040104','010401','健康');
+		d.add('0104010401','01040104','健康','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=6&page=1','','mainFrame');
+		d.add('01040105','010401','语言');
+		d.add('0104010501','01040105','语言','${pageContext.request.contextPath}/bookSuperManager_findBookAll?btype=7&page=1','','mainFrame');
+		
+		d.add('010402','0104','教案管理');
+		d.add('01040201','010402','社会');
+		d.add('0104020101','01040201','社会','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=1&page=1','','mainFrame');
+		d.add('01040202','010402','科学');
+		d.add('0104020201','01040202','数学','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=2&page=1','','mainFrame');
+		d.add('0104020202','01040202','探究','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=3&page=1','','mainFrame');
+		d.add('01040203','010402','艺术');
+		d.add('0104020301','01040203','美术','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=4&page=1','','mainFrame');
+		d.add('0104020302','01040203','音乐','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=5&page=1','','mainFrame');
+		d.add('01040204','010402','健康');
+		d.add('0104020401','01040204','健康','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=6&page=1','','mainFrame');
+		d.add('01040205','010402','健康');
+		d.add('0104020501','01040205','语言','${pageContext.request.contextPath}/teachingPlan_findTeachingPlans?btype=7&page=1','','mainFrame');
+		
+		d.add('010403','0104','绘本主题');
+		d.add('01040301','010403','大班','${pageContext.request.contextPath}/bookThemeSuperManager_booktheme?page=1&classType=大班','','mainFrame');
+		d.add('01040302','010403','中班','${pageContext.request.contextPath}/bookThemeSuperManager_booktheme?page=1&classType=中班','','mainFrame');
+		d.add('01040303','010403','小班','${pageContext.request.contextPath}/bookThemeSuperManager_booktheme?page=1&classType=小班','','mainFrame');
+		d.add('010404','0104','绘本类型');
+		d.add('01040401','010404','绘本类型','${pageContext.request.contextPath}/bookTypeSuperManager_booktype?page=1','','mainFrame');
+		
+		
 		
 		d.add('0105','01','个人中心');
 		d.add('010501','0105','个人信息','${pageContext.request.contextPath}/manager_info?aid=1','','mainFrame');

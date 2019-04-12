@@ -44,7 +44,10 @@ public class BookTypeSuperManagerAction extends ActionSupport implements ModelDr
 		return "update";
 	}
 	public String save() {
-		bookTypeService.save(bookType);
+		BookType temp = bookTypeService.findBookTypeByName(bookType.getBook_type_name());
+		if(temp==null) {
+			bookTypeService.save(bookType);
+		}
 		return "save";
 	}
 	public String addBookTypePage() {

@@ -78,7 +78,7 @@
 										width="2%">${b.bid }</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="17%"><a
-										href="${pageContext.request.contextPath }/bookDean_info?bid=${b.bid }&btype=${b.type}">
+										href="${pageContext.request.contextPath }/bookDean_show?bid=${b.bid }&btype=${b.type}">
 											${b.name }
 									</a></td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"

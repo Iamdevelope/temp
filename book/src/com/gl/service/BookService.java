@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.dao.BookDao;
 import com.gl.model.Book;
+import com.gl.model.BookTheme;
+import com.gl.model.BookType;
 import com.gl.model.Book_Teacher;
 import com.gl.model.Teacher;
 import com.gl.utils.PageBean;
@@ -26,6 +28,9 @@ public class BookService{
 	}
 	public void delete(Book book) {
 		bookDao.delete(book);
+	}
+	public Book findBookByName(String name) {
+		return bookDao.findBookByName(name);
 	}
 	//业务层查询所有书本
 	public PageBean<Book> findBookPage(Integer tid,int currentPage){
@@ -210,5 +215,11 @@ public class BookService{
 	}
 	public List<Book> findAllBooksByBookType(String bookType){
 		return bookDao.findBookByKey(bookType);
+	}
+	public BookType findBookTypeByName(String name) {
+		return bookDao.findBookTypeByName(name);
+	}
+	public BookTheme findBookThemeByName(String name) {
+		return bookDao.findBookThemeByName(name);
 	}
 }

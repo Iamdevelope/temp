@@ -1,4 +1,0 @@
-jdbc.driver = com.mysql.jdbc.Driver
-jdbc.url = jdbc:mysql:///book
-jdbc.user = root
-jdbc.password =root

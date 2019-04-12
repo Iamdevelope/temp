@@ -89,7 +89,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 					existDean.setLogin_count(count+1);
 				}
 				existDean.setLast_login_time(TimeHelper.getCurrentTime());
-				existDean.setLogin_state(1);
+				//existDean.setLogin_state(1);
 				deanService.update(existDean);
 				ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existDean);
 				//System.out.println("login success");
@@ -122,7 +122,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 					existTeacher.setLogin_count(count+1);
 				}
 				existTeacher.setLast_login_time(TimeHelper.getCurrentTime());
-				existTeacher.setLogin_state(1);
+				//existTeacher.setLogin_state(1);
 				teacherService.update(existTeacher);
 				ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existTeacher);
 				//System.out.println("登录成功");

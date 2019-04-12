@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.gl.model.Book;
+import com.gl.model.BookTheme;
+import com.gl.model.BookType;
 import com.gl.model.Book_Teacher;
 import com.gl.model.Teacher;
 import com.gl.utils.PageHibernateCallback;
@@ -21,6 +23,7 @@ public class BookDao extends HibernateDaoSupport {
 	public void delete(Book book) {
 		this.getHibernateTemplate().delete(book);
 	}
+	
 	//获取所有绘本数量
 	public int findAllBooks() {
 		String query="Select count(*) from Book";
@@ -29,6 +32,14 @@ public class BookDao extends HibernateDaoSupport {
 			return list.get(0).intValue();
 		}
 		return 0;
+	}
+	public Book findBookByName(String name) {
+		String query = "from Book where name = ?";
+		List<Book>	list = this.getHibernateTemplate().find(query, name);
+		if(list!=null&&list.size()>0) {
+			return list.get(0);
+		}
+		return null;
 	}
 	public Teacher findAllBooksByTid(Integer tid){
 		return this.getHibernateTemplate().get(Teacher.class, tid);
@@ -99,6 +110,22 @@ public class BookDao extends HibernateDaoSupport {
 	public Book_Teacher findBookIsAdd(Integer bid, Integer tid) {
 		String query = "from Book_Teacher where bid = ? and tid = ?";
 		List<Book_Teacher> list = this.getHibernateTemplate().find(query, bid,tid);
+		if(list!=null&&list.size()>0) {
+			return list.get(0);
+		}
+		return null;
+	}
+	public BookType findBookTypeByName(String name) {
+		String query = "from BookType where book_type_name = ?";
+		List<BookType> list = this.getHibernateTemplate().find(query, name);
+		if(list!=null&&list.size()>0) {
+			return list.get(0);
+		}
+		return null;
+	}
+	public BookTheme findBookThemeByName(String name) {
+		String query = "from BookTheme where theme_name = ?";
+		List<BookTheme> list = this.getHibernateTemplate().find(query, name);
 		if(list!=null&&list.size()>0) {
 			return list.get(0);
 		}

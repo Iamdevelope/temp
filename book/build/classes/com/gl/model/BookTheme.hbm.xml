@@ -16,5 +16,9 @@
             <key column="idbooktheme"/>
             <one-to-many class="com.gl.model.Book"/>
         </set>
+        <set name="teachingplan" cascade="delete">
+            <key column="idbooktheme" />
+            <one-to-many class="com.gl.model.Book"/>
+        </set>
     </class>
 </hibernate-mapping>

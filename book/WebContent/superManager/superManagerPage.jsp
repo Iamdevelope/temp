@@ -12,7 +12,7 @@ body {
 <link href="${pageContext.request.contextPath }/images/favicon.ico"
 	rel="shortcut icon">
 <script type="text/javascript">
-    	window.onbeforeunload=function(e){
+    	/* window.onbeforeunload=function(e){
     		console.log("该用户退出成功");
     		window.location.href="${pageContext.request.contextPath}/superManager_quit";
     	}
@@ -20,7 +20,7 @@ body {
 			if(self.screenTop>9000){			
 				window.location.href="${pageContext.request.contextPath}/superManager_quit";
 			}
-		}
+		} */
 		
     </script>
 <title>绘本管理后台-超级管理员</title>

@@ -12,6 +12,7 @@
 <link href="css/Style1.css"
 	rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/jquery-easyui-1.2.6/jquery-1.7.2.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.6/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.2.6/themes/icon.css" />
@@ -25,6 +26,9 @@
 	<script type="text/javascript" src="js/swfobject.js"></script>
 	<script type="text/javascript" src="js/jquery.uploadify.v2.1.0.min.js"></script>
 	<script type="text/javascript" src="js/excel.js"></script>
+	
+	<script src="js/UploadW.js"></script>
+	<link rel="stylesheet" href="css/uploadW.css">
 <style type="text/css">
 h2 {
 	border-top: solid cornflowerblue 1px;
@@ -155,9 +159,6 @@ $(document).ready(function(){
 	$('#importBtn').on('click',function(){
 		$('#importModel').dialog('open');
 	});
-	$('#importWordBtn').on('click',function(){
-		$('#importWordPanel').dialog('open');
-	});
 	$('#md2').menubutton({
 		menu:'#mm2'
 	});
@@ -165,9 +166,9 @@ $(document).ready(function(){
 		menu:'#mm1'
 	});
 	$('#addPage').on('click',function(){
-		$('#addModel').dialog('open');
-		//var type = $('input#btype').val();
-		//window.location.href = "${pageContext.request.contextPath}/bookSuperManager_addPage?btype="+type;
+		var type=$('input#btype').val();
+		//$('#addModel').dialog('open');
+		window.location.href = "${pageContext.request.contextPath}/bookSuperManager_addPage?btype="+type;
 	});
 	$('input#selectBtn').on('click',function(){
 		var select=$('input#select').val(),
@@ -283,7 +284,7 @@ function keypress(){
 										</a></td>
 										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 											width="8%"><%-- <s:property value="#b.book_type" /> --%>
-											${b.book_type }
+											${b.booktype.book_type_name }
 											</td>
 										<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 											width="8%"><%-- <s:property value="#b.book_class" /> --%>
@@ -389,24 +390,6 @@ function keypress(){
     	</form>
 	</div>
 	
-	<div class="easyui-dialog" title="导入绘本教案" id="importWordPanel" draggable=true modal=true closed=true style="display:black;width:350px;height:200px" >
-		<form id="importForm" action="${pageContext.request.contextPath }/bookSuperManager_importWordData" enctype="multipart/form-data" method="post">
-    		<table>
-    			<tr>
-    				<td>浏览:</td>
-    				<td>
-    					<input id="wordInput" name="wordInput" type="file" />
-    				</td>
-    			</tr>
-    			<tr>
-    				<td colspan="2">
-    					<input type="submit" onclick="return importWordData()" id="importWordBtn" class="easyui-linkbutton" value="导入"/>
-    				</td>
-    			</tr>
-    		</table>
-    	</form>
-	</div>
-	
 	<div class="easyui-dialog" title="新增绘本数据" id="addModel" draggable=true modal=true closed=true style="display:black;width:630px;height:315px" >
 		<form id="teacher_save_do" name="Form1"
 		action="${pageContext.request.contextPath}/bookSuperManager_save?btype=<s:property value="type"/>"
@@ -485,10 +468,7 @@ function keypress(){
 			<a  title="新增单本绘本信息" >新增绘本</a>
 		</div>
 		<div id="importBtn">
-			<a title="导入绘本信息">导入数据</a>
-		</div>
-		<div id="importWordBtn">
-			<a title="导入绘本教案信息">上传绘本教案</a>
+			<a title="导入绘本信息">导入绘本信息</a>
 		</div>
 	</div>
 </body>

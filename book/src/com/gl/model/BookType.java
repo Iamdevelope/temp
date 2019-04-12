@@ -11,6 +11,7 @@ public class BookType {
 	private String book_type_name;
 	private String description;
 	private Set<Book> book = new HashSet<Book>();
+	private Set<TeachingPlan> teachingPlan = new HashSet<TeachingPlan>();
 	public Integer getIdbooktype() {
 		return idbooktype;
 	}
@@ -34,6 +35,12 @@ public class BookType {
 	}
 	public void setBook(Set<Book> book) {
 		this.book = book;
+	}
+	public Set<TeachingPlan> getTeachingPlan() {
+		return teachingPlan;
+	}
+	public void setTeachingPlan(Set<TeachingPlan> teachingPlan) {
+		this.teachingPlan = teachingPlan;
 	}
 	
 }

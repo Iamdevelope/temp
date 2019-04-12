@@ -79,8 +79,11 @@ $(document).ready(function(){
 	$('#addPage').on('click',function(){
 		$('#addModel').dialog('open');
 	});
-	$('#md').menubutton({
-		menu:'#mm'
+	$('#md1').menubutton({
+		menu:'#mm1'
+	});
+	$('#md2').menubutton({
+		menu:'#mm2'
 	});
 	$('#importBtn').on('click',function(){
 		$('#importModel').dialog('open');
@@ -90,6 +93,54 @@ $(document).ready(function(){
 	});
 	$('#edit').on('click',function(){
 		$('#editPanel').dialog('open');	
+	});
+	$('#downloadModel').click(function(){
+		var booktype = '';
+		var type='${class_type}';
+		console.log("type is "+type);
+		switch(type){
+		case '大班':
+			booktype='theme_big_class';
+			break;
+		case '中班':
+			booktype='theme_middle_class';
+			break;
+		case '小班':
+			booktype='theme_small_class';
+			break;
+		}
+		window.location.href = "${pageContext.request.contextPath}/modelDownload?templateId="+booktype;
+	});
+	$('#downloadData').click(function(){
+		var booktype = '';
+		var type='${class_type}';
+		switch(type){
+		case '大班':
+			booktype='theme_big_class';
+			break;
+		case '中班':
+			booktype='theme_middle_class';
+			break;
+		case '小班':
+			booktype='theme_small_class';
+			break;
+		}
+		console.log("绘本类型："+booktype+"  id："+type);
+		window.location.href = "${pageContext.request.contextPath}/bookThemeSuperManager?templateDownId="+booktype+"&classType="+type;
+	});
+	$('input#selectBtn').on('click',function(){
+		var select=$('input#select').val(),
+			type='${class_type}';
+		var reg=/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+		if(reg.test(select)){
+			$.messager.alert('提示信息','关键字中存在非法字符');
+			return;
+		}
+		if(select==null||select=="主题名称"){
+			$.messager.alert('提示信息','请输入关键字');
+			return;
+		}
+		window.location.href="${pageContext.request.contextPath}/bookThemeSuperManager_select?page=1&select="+select+"&classType="+type;
 	});
 });
 
@@ -125,10 +176,21 @@ function check_theme_data(){
 				<tr>
 					<td class="ta_01" align="center" bgColor="#afd1f3">
 						<div class="excelBtn">
-							<a class="exportId icon-add" id="md" style="padding-left:20px;" href="javascript:void(0)" title="绘本主题信息" iconCls="icon-add" >导入数据</a>
+							<a class="exportId" style="padding-left:20px;" id="md1" href="javascript:void(0)" iconCls="icon-save" title="下载Excel模板" >导出数据</a>
+							<a class="importId icon-add" id="md2" style="padding-left:20px;" href="javascript:void(0)" title="导入绘本信息" iconCls="icon-add" >导入数据</a>
 						</div>
 						<strong>绘本主题列表</strong>
 					</TD>
+				</tr>
+				<tr>
+					<td class="ta_01"><span>关键词：</span><input type="text" id="select" name="select"
+						value="主题名称"
+						onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+						onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+						style="color: #999999"></input> <input type="button" class="button_search"
+						id="selectBtn" title="搜索"  />
+						<p style="left:20px;color: red;">提示：点击主题的名字可查看绘本详细信息。</p>
+					</td>
 				</tr>
 				<tr>
 					<td class="ta_01" align="center" bgColor="#f5fafe">
@@ -144,6 +206,9 @@ function check_theme_data(){
 								<td align="center" width="10%">上/下学期</td>
 								<td align="center" width="50%">描述</td>
 								<td width="10%" align="center">编辑</td>
+								<c:if test="${existAdmin.isadmin==0 }">
+									<td width="7%" align="center">删除</td>
+								</c:if>
 							</tr>
 
 							<c:forEach var="b" items="${pageBean.list}">
@@ -160,16 +225,11 @@ function check_theme_data(){
 									</a></td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="10%">
-										${b.class_type }
+										<font id="class_type">${b.class_type }</font>
 										</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="10%">
-										<c:if test="${b.term==0 }">
-											上学期
-										</c:if>
-										<c:if test="${b.term==1 }">
-											下学期
-										</c:if>
+										${b.term }
 										</td>
 									<td style="CURSOR: hand; HEIGHT: 30px" align="center"
 										width="30%">
@@ -182,6 +242,14 @@ function check_theme_data(){
 											src="${pageContext.request.contextPath}/images/i_edit.gif"
 											border="0" style="CURSOR: hand" title="编辑">
 									</a></td>
+									<c:if test="${existAdmin.isadmin==0 }">
+										<td align="center" style="HEIGHT: 30px"><a
+											href="${pageContext.request.contextPath}/bookThemeSuperManager_delete?idbooktheme=${b.idbooktheme}&classType=${class_type}">
+												<img
+												src="${pageContext.request.contextPath}/images/i_del.gif"
+												width="16" height="16" border="0" style="CURSOR: hand">
+										</a></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</table>
@@ -215,7 +283,7 @@ function check_theme_data(){
 	</div>
 	
 	<div class="easyui-dialog" title="导入Excel数据" id="importModel" draggable=true modal=true closed=true style="display:black;width:350px;height:200px" >
-		<form id="importForm" action="${pageContext.request.contextPath }/bookSuperManager_importData" enctype="multipart/form-data" method="post">
+		<form id="importForm" action="${pageContext.request.contextPath }/bookThemeSuperManager_importData" enctype="multipart/form-data" method="post">
     		<table>
     			<tr>
     				<td>浏览:</td>
@@ -264,8 +332,8 @@ function check_theme_data(){
 				</td>
 				<td class="ta_01" bgColor="#ffffff">
 					<select name="term">
-						<option value="0">上学期</option>
-						<option value="1">下学期</option>
+						<option value="上学期">上学期</option>
+						<option value="下学期">下学期</option>
 				</select></td>
 				</td>
 			</tr>
@@ -290,10 +358,20 @@ function check_theme_data(){
 		</table>
 	</form>
 	</div>
-	
-	<div id="mm" style="width:12%;">
+	<div id="mm1" style="width:12%;">
+		<div id="downloadModel">
+			<a  title="下载主题Excel模板" >导出模板</a>
+		</div>
+		<div id="downloadData">
+			<a  title="导出绘本主题表信息" >导出数据</a>
+		</div>
+	</div>
+	<div id="mm2" style="width:12%;">
 		<div id="addPage">
 			<a  title="新增绘本主题信息" >新增绘本主题</a>
+		</div>
+		<div id="importBtn">
+			<a  title="导入绘本主题表信息" >导入主题Excel表</a>
 		</div>
 	</div>
 </body>

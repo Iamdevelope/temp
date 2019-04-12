@@ -86,14 +86,26 @@
 			</tr>
 			<tr>
 				<td width="30%" align="center" bgColor="#f5fafe">计算机码：</td>
-				<td bgColor="#ffffff"><input type="text" name="name"
+				<td bgColor="#ffffff"><input type="text" name="computerCode"
 					value="<s:property value="model.computerCode"/>"
 					id="computer_code" class="bg" /></td>
 			</tr>
 			<tr>
 				<td width="30%" align="center" bgColor="#f5fafe">软件注册码：</td>
-				<td bgColor="#ffffff"><input type="text" name="name"
+				<td bgColor="#ffffff"><input type="text" name="softwareCode"
 					value="<s:property value="model.softwareCode"/>"
+					id="softwate_code" class="bg" style="width:300px;" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<td width="30%" align="center" bgColor="#f5fafe">是否激活：</td>
+				<td bgColor="#ffffff"><input type="text" name="used"
+					value="<s:property value="model.softwareCode"/>"
+					id="softwate_code" class="bg" style="width:300px;" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<td width="30%" align="center" bgColor="#f5fafe">有效期：</td>
+				<td bgColor="#ffffff"><input type="text" name="time"
+					value="<s:property value="model.time"/>"
 					id="softwate_code" class="bg" style="width:300px;" readonly="readonly" /></td>
 			</tr>
 			<tr>

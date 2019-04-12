@@ -138,7 +138,7 @@ public class SuperManagerAction extends ActionSupport implements ModelDriven<Adm
 			int count = existAdmin.getLogin_count();
 			existAdmin.setLogin_count(count+1);
 			existAdmin.setLast_login_time(TimeHelper.getCurrentTime());
-			existAdmin.setLogin_state(1);
+			//existAdmin.setLogin_state(1);
 			admin=existAdmin;
 			adminService.update(existAdmin);
 			ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existAdmin);
@@ -152,7 +152,7 @@ public class SuperManagerAction extends ActionSupport implements ModelDriven<Adm
 	 * */
 	public void quit() {
 		Admin admin = (Admin)ServletActionContext.getRequest().getSession().getAttribute("existAdmin");
-		admin.setLogin_state(0);
+		//admin.setLogin_state(0);
 		//System.out.println("退出成功，将该用户的登录状态更改。");
 		adminService.update(admin);
 		ServletActionContext.getRequest().getSession().removeAttribute("existAdmin");

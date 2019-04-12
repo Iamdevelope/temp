@@ -4,7 +4,10 @@ public class TeachingPlan {
 	private Integer idteaching_plan;
 	private String teaching_plan_name;
 	private String teaching_path;
+	private String book_class;
+	private BookTheme booktheme;
 	private Book book;
+	private BookType booktype;
 	public Integer getIdteaching_plan() {
 		return idteaching_plan;
 	}
@@ -28,6 +31,24 @@ public class TeachingPlan {
 	}
 	public void setBook(Book book) {
 		this.book = book;
+	}
+	public BookType getBooktype() {
+		return booktype;
+	}
+	public void setBooktype(BookType bookType) {
+		this.booktype = bookType;
+	}
+	public String getBook_class() {
+		return book_class;
+	}
+	public void setBook_class(String book_class) {
+		this.book_class = book_class;
+	}
+	public BookTheme getBooktheme() {
+		return booktheme;
+	}
+	public void setBooktheme(BookTheme booktheme) {
+		this.booktheme = booktheme;
 	}
 	
 }

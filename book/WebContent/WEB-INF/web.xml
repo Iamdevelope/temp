@@ -22,12 +22,27 @@
   <session-config>
     <session-timeout>300</session-timeout>
   </session-config>
-  <!-- <servlet>
-      <servlet-name>ManagerUpload</servlet-name>
-      <servlet-class>com.gl.servlet.ManagerUpload</servlet-class>
+
+   <!-- PageOffice Begin -->
+  <servlet>
+    <servlet-name>poserver</servlet-name> 
+    <servlet-class>com.zhuozhengsoft.pageoffice.poserver.Server</servlet-class> 
   </servlet>
-  <servlet-mapping>
-      <servlet-name>ManagerUpload</servlet-name>
-      <url-pattern>/ManagerUpload</url-pattern>
-  </servlet-mapping> -->
+  <servlet-mapping> 
+    <servlet-name>poserver</servlet-name> 
+    <url-pattern>/poserver.do</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping> 
+    <servlet-name>poserver</servlet-name> 
+    <url-pattern>/poserver.zz</url-pattern> 
+  </servlet-mapping>  
+  <servlet-mapping> 
+     <servlet-name>poserver</servlet-name> 
+     <url-pattern>/posetup.exe</url-pattern>
+  </servlet-mapping>
+
+  <mime-mapping>  
+  	<extension>mht</extension>  
+  	<mime-type>message/rfc822</mime-type>  
+  </mime-mapping>
 </web-app>

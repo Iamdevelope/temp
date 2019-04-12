@@ -18,7 +18,8 @@
 			function load(){
 				var img=document.getElementById("fengmian");
 				var name=document.getElementById("book_name").value;
-				img.src="../book/images/"+name+"/fengmian.jpg";
+				var book_type = document.getElementById("book_type").value;
+				img.src="../book/bookImages/"+book_type+"/"+name+"/fengmian.jpg";
 			}
 		</script>
 
@@ -40,6 +41,8 @@
 			<input type="hidden" id="book_name" value="<s:property value="model.name"/>" />
 			<input type="hidden" id="type"
 				value="<s:property value="model.type"/>" />
+			<input type="hidden" id="book_type"
+				value="<s:property value="book_type"/>" />
 			<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 				bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 				<tr>

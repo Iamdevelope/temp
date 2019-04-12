@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.gl.model.BookTheme;
 import com.gl.model.BookType;
 import com.gl.utils.PageHibernateCallback;
 
@@ -33,5 +34,13 @@ public class BookTypeDao extends HibernateDaoSupport {
 	}
 	public BookType selectBookTypeById(Integer id) {
 		return this.getHibernateTemplate().get(BookType.class, id);
+	}
+	public BookType findBookTypeByName(String name) {
+		String query = "from BookType where book_type_name = ?";
+		List<BookType> list = this.getHibernateTemplate().find(query, name);
+		if(list!=null&&list.size()>0) {
+			return list.get(0);
+		}
+		return null;
 	}
 }

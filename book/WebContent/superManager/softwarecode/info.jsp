@@ -16,7 +16,7 @@
 <body>
 	<div>
 		<form id="bookSuperManager_save_do" name="Form1">
-			<table cellSpacing="1" cellPadding="5" width="100%" align="center"
+			<table cellSpacing="1" cellPadding="5" width="50%" align="center"
 				bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
 				<tr>
 					<td class="ta_01" align="center" bgColor="#afd1f3" colSpan="4"
@@ -33,6 +33,17 @@
 				<tr>
 					<td align="center" bgColor="#f5fafe">软件码：</td>
 					<td bgColor="#ffffff"><s:property value="model.softwareCode" />
+					</td>
+				</tr>
+				<tr>
+					<td align="center" bgColor="#f5fafe">是否激活：</td>
+					<td bgColor="#ffffff"><s:if test="model.used==0">未激活</s:if>
+					<s:else>已激活</s:else>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" bgColor="#f5fafe">有效期：</td>
+					<td bgColor="#ffffff"><s:property value="model.time" />
 					</td>
 				</tr>
 				<tr>
